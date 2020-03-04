@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import TrackPlayer, { usePlaybackState } from "react-native-track-player";
 import Player from "../components/Player";
-import ameno from '../resources/ameno.mp3'
+// import CustomPlayer from "../components/CustomPlayer";
+import ameno from '../resources/ameno.mp3';
 
 // import { Container } from './styles';
 
@@ -56,6 +57,9 @@ export default function Book() {
         <Player
           style={styles.player}
           onTogglePlayback={togglePlayback} />
+        {/* <CustomPlayer /> */}
+
+        
     </View>
   );
 }

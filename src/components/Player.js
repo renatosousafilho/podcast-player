@@ -9,40 +9,26 @@ import {
   View,
   ViewPropTypes
 } from "react-native";
-import TrackSlider from './TrackSlider';
-// import Tracker from './Tracker';
+import Tracker from './Tracker';
+import playIcon from './icons/play-icon.png';
+import pauseIcon from './icons/pause-icon.png';
+import previousIcon from './icons/previous-icon.png';
+import nextIcon from './icons/next-icon.png';
 
-function ProgressBar() {
-  // const progress = TrackPlayer.useTrackPlayerProgress();
-  const { position, duration } = TrackPlayer.useTrackPlayerProgress()
 
-  return (
-    <>
-      <View style={styles.progress}>
-        <View style={{ flex: position, backgroundColor: "red" }} />
-        <View
-          style={{
-            flex: duration - position,
-            backgroundColor: "grey"
-          }}
-        />
-      </View>
-      <Text>Track progress: {position} seconds out of {duration} total</Text>
-    </>
-  );
-}
 
-function ControlButton({ title, onPress }) {
+
+function ControlButton({ icon, onPress }) {
   return (
     <TouchableOpacity style={styles.controlButtonContainer} onPress={onPress}>
-      <Text style={styles.controlButtonText}>{title}</Text>
+      <Image source={icon} style={styles.controlButtonIcon} resizeMode='contain'/>
     </TouchableOpacity>
   );
 }
 
 ControlButton.propTypes = {
-  title: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired
+  icon: PropTypes.number.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
 export default function Player(props) {
@@ -50,6 +36,7 @@ export default function Player(props) {
   const [trackTitle, setTrackTitle] = useState("");
   const [trackArtwork, setTrackArtwork] = useState("");
   const [trackArtist, setTrackArtist] = useState("");
+
   TrackPlayer.useTrackPlayerEvents(["playback-track-changed"], async event => {
     if (event.type === TrackPlayer.TrackPlayerEvents.PLAYBACK_TRACK_CHANGED) {
       const track = await TrackPlayer.getTrack(event.nextTrack);
@@ -61,27 +48,26 @@ export default function Player(props) {
 
   const { style, onNext, onPrevious, onTogglePlayback } = props;
 
-  var middleButtonText = "Play";
+  var middleButtonIcon = playIcon;
 
   if (
     playbackState === TrackPlayer.STATE_PLAYING ||
     playbackState === TrackPlayer.STATE_BUFFERING
   ) {
-    middleButtonText = "Pause";
+    middleButtonIcon = pauseIcon;
   }
+
 
   return (
     <View style={[styles.card, style]}>
-      {/* <Image style={styles.cover} source={{ uri: trackArtwork }} /> */}
-      {/* <ProgressBar /> */}
-      <TrackSlider />
-      {/* <Tracker /> */}
+      <Image style={styles.cover} source={{ uri: trackArtwork }} />
+      <Tracker />
       <Text style={styles.title}>{trackTitle}</Text>
       <Text style={styles.artist}>{trackArtist}</Text>
       <View style={styles.controls}>
-        <ControlButton title={"<<"} onPress={onPrevious} />
-        <ControlButton title={middleButtonText} onPress={onTogglePlayback} />
-        <ControlButton title={">>"} onPress={onNext} />
+        <ControlButton onPress={onPrevious} icon={previousIcon} />
+        <ControlButton onPress={onTogglePlayback} icon={middleButtonIcon} />
+        <ControlButton onPress={onNext} icon={nextIcon} />
       </View>
     </View>
   );
@@ -91,7 +77,7 @@ Player.propTypes = {
   style: ViewPropTypes.style,
   onNext: PropTypes.func.isRequired,
   onPrevious: PropTypes.func.isRequired,
-  onTogglePlayback: PropTypes.func.isRequired
+  onTogglePlayback: PropTypes.func.isRequired,
 };
 
 Player.defaultProps = {
@@ -100,7 +86,7 @@ Player.defaultProps = {
 
 const styles = StyleSheet.create({
   card: {
-    width: "80%",
+    width: "90%",
     elevation: 1,
     borderRadius: 4,
     shadowRadius: 2,
@@ -123,20 +109,24 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   title: {
-    marginTop: 10
+    marginTop: 10,
   },
   artist: {
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   controls: {
-    marginVertical: 20,
-    flexDirection: "row"
+    flexDirection: "row",
+    alignItems: 'center'
   },
   controlButtonContainer: {
-    flex: 1
+    padding: 8,
   },
   controlButtonText: {
     fontSize: 18,
     textAlign: "center"
+  },
+  controlButtonIcon: {
+    width: 40, 
+    height: 30
   }
 });
