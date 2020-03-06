@@ -7,12 +7,13 @@
  */
 import 'react-native-gesture-handler';
 import React from 'react';
-import Main from './Main'
-import Book from './Book'
+import Main from './Main';
+import Book from './Book';
 import './config/ReactotronConfig';
 
 export default function App() {
   return (
-    <Book></Book>
+    // <Book></Book>
+    <Main></Main>
   );
 }

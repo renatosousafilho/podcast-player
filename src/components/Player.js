@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import TrackPlayer from "react-native-track-player";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import TrackPlayer from 'react-native-track-player';
 import {
   Image,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  ViewPropTypes
-} from "react-native";
+  ViewPropTypes,
+} from 'react-native';
 import Tracker from './Tracker';
 import playIcon from './icons/play-icon.png';
 import pauseIcon from './icons/pause-icon.png';
@@ -18,7 +18,11 @@ import nextIcon from './icons/next-icon.png';
 function ControlButton({ icon, onPress }) {
   return (
     <TouchableOpacity style={styles.controlButtonContainer} onPress={onPress}>
-      <Image source={icon} style={styles.controlButtonIcon} resizeMode='contain'/>
+      <Image
+        source={icon}
+        style={styles.controlButtonIcon}
+        resizeMode="contain"
+      />
     </TouchableOpacity>
   );
 }
@@ -30,11 +34,11 @@ ControlButton.propTypes = {
 
 export default function Player(props) {
   const playbackState = TrackPlayer.usePlaybackState();
-  const [trackTitle, setTrackTitle] = useState("");
-  const [trackArtwork, setTrackArtwork] = useState("");
-  const [trackArtist, setTrackArtist] = useState("");
+  const [trackTitle, setTrackTitle] = useState('');
+  const [trackArtwork, setTrackArtwork] = useState('');
+  const [trackArtist, setTrackArtist] = useState('');
 
-  TrackPlayer.useTrackPlayerEvents(["playback-track-changed"], async event => {
+  TrackPlayer.useTrackPlayerEvents(['playback-track-changed'], async event => {
     if (event.type === TrackPlayer.TrackPlayerEvents.PLAYBACK_TRACK_CHANGED) {
       const track = await TrackPlayer.getTrack(event.nextTrack);
       setTrackTitle(track.title);
@@ -54,18 +58,22 @@ export default function Player(props) {
     middleButtonIcon = pauseIcon;
   }
 
-
   return (
     <View style={[styles.card, style]}>
-      <Image style={styles.cover} source={{ uri: trackArtwork }} />
+      <Image
+        style={styles.cover}
+        source={{
+          uri: trackArtwork,
+        }}
+      />{' '}
       <Tracker />
-      <Text style={styles.title}>{trackTitle}</Text>
-      <Text style={styles.artist}>{trackArtist}</Text>
+      <Text style={styles.title}> {trackTitle} </Text>{' '}
+      <Text style={styles.artist}> {trackArtist} </Text>{' '}
       <View style={styles.controls}>
-        <ControlButton onPress={onPrevious} icon={previousIcon} />
-        <ControlButton onPress={onTogglePlayback} icon={middleButtonIcon} />
-        <ControlButton onPress={onNext} icon={nextIcon} />
-      </View>
+        <ControlButton onPress={onPrevious} icon={previousIcon} />{' '}
+        <ControlButton onPress={onTogglePlayback} icon={middleButtonIcon} />{' '}
+        <ControlButton onPress={onNext} icon={nextIcon} />{' '}
+      </View>{' '}
     </View>
   );
 }
@@ -78,52 +86,55 @@ Player.propTypes = {
 };
 
 Player.defaultProps = {
-  style: {}
+  style: {},
 };
 
 const styles = StyleSheet.create({
   card: {
-    width: "90%",
+    width: '90%',
     elevation: 1,
     borderRadius: 4,
     shadowRadius: 2,
     shadowOpacity: 0.1,
-    alignItems: "center",
-    shadowColor: "black",
-    backgroundColor: "white",
-    shadowOffset: { width: 0, height: 1 }
+    alignItems: 'center',
+    shadowColor: 'black',
+    backgroundColor: 'white',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
   },
   cover: {
     width: 140,
     height: 140,
     marginTop: 20,
-    backgroundColor: "grey"
+    backgroundColor: 'grey',
   },
   progress: {
     height: 1,
-    width: "90%",
+    width: '90%',
     marginTop: 10,
-    flexDirection: "row"
+    flexDirection: 'row',
   },
   title: {
     marginTop: 10,
   },
   artist: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   controls: {
-    flexDirection: "row",
-    alignItems: 'center'
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   controlButtonContainer: {
     padding: 8,
   },
   controlButtonText: {
     fontSize: 18,
-    textAlign: "center"
+    textAlign: 'center',
   },
   controlButtonIcon: {
-    width: 40, 
-    height: 30
-  }
+    width: 40,
+    height: 30,
+  },
 });
