@@ -15,9 +15,6 @@ import pauseIcon from './icons/pause-icon.png';
 import previousIcon from './icons/previous-icon.png';
 import nextIcon from './icons/next-icon.png';
 
-
-
-
 function ControlButton({ icon, onPress }) {
   return (
     <TouchableOpacity style={styles.controlButtonContainer} onPress={onPress}>

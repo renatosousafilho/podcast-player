@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import TrackPlayer, { usePlaybackState } from "react-native-track-player";
-import Player from "../components/Player";
-// import CustomPlayer from "../components/CustomPlayer";
+import TrackPlayer, { usePlaybackState } from 'react-native-track-player';
+import Player from '../components/Player';
 import ameno from '../resources/ameno.mp3';
 
 // import { Container } from './styles';
@@ -20,12 +19,12 @@ export default function Book() {
         TrackPlayer.CAPABILITY_PAUSE,
         TrackPlayer.CAPABILITY_SKIP_TO_NEXT,
         TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS,
-        TrackPlayer.CAPABILITY_STOP
+        TrackPlayer.CAPABILITY_STOP,
       ],
       compactCapabilities: [
         TrackPlayer.CAPABILITY_PLAY,
-        TrackPlayer.CAPABILITY_PAUSE
-      ]
+        TrackPlayer.CAPABILITY_PAUSE,
+      ],
     });
   }, []);
 
@@ -34,11 +33,11 @@ export default function Book() {
     if (currentTrack == null) {
       await TrackPlayer.reset();
       await TrackPlayer.add({
-        id: "local-track",
+        id: 'local-track',
         url: ameno,
-        title: "Passinho do Ameno (Remix Era)",
-        artist: "SHEVCHENKO E ELLOCO",
-        artwork: "https://pbs.twimg.com/media/ELsGJsvWoAAwVXe.jpg"
+        title: 'Passinho do Ameno (Remix Era)',
+        artist: 'SHEVCHENKO E ELLOCO',
+        artwork: 'https://pbs.twimg.com/media/ELsGJsvWoAAwVXe.jpg',
       });
       await TrackPlayer.play();
     } else {
@@ -51,35 +50,29 @@ export default function Book() {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Book</Text>
-        
-        <Player
-          style={styles.player}
-          onTogglePlayback={togglePlayback} />
-        {/* <CustomPlayer /> */}
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Book</Text>
 
-        
+      <Player style={styles.player} onTogglePlayback={togglePlayback} />
     </View>
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
   description: {
-    width: "80%",
+    width: '80%',
     marginTop: 20,
-    textAlign: "center"
+    textAlign: 'center',
   },
   player: {
-    marginTop: 40
+    marginTop: 40,
   },
   state: {
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
 });
