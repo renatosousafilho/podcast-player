@@ -65,15 +65,15 @@ export default function Player(props) {
         source={{
           uri: trackArtwork,
         }}
-      />{' '}
+      />
       <Tracker />
-      <Text style={styles.title}> {trackTitle} </Text>{' '}
-      <Text style={styles.artist}> {trackArtist} </Text>{' '}
+      <Text style={styles.title}> {trackTitle} </Text>
+      <Text style={styles.artist}> {trackArtist} </Text>
       <View style={styles.controls}>
-        <ControlButton onPress={onPrevious} icon={previousIcon} />{' '}
-        <ControlButton onPress={onTogglePlayback} icon={middleButtonIcon} />{' '}
-        <ControlButton onPress={onNext} icon={nextIcon} />{' '}
-      </View>{' '}
+        <ControlButton onPress={onPrevious} icon={previousIcon} />
+        <ControlButton onPress={onTogglePlayback} icon={middleButtonIcon} />
+        <ControlButton onPress={onNext} icon={nextIcon} />
+      </View>
     </View>
   );
 }

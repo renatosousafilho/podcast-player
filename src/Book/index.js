@@ -6,7 +6,9 @@ import ameno from '../resources/ameno.mp3';
 
 // import { Container } from './styles';
 
-export default function Book() {
+export default function Book({route, navigation}) {
+  const { bookId } = route.params;
+  
   const playbackState = TrackPlayer.usePlaybackState();
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function Book() {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Book</Text>
+      <Text>Book {bookId}</Text>
 
       <Player style={styles.player} onTogglePlayback={togglePlayback} />
     </View>

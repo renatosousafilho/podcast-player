@@ -11,7 +11,7 @@ export const Books = styled.FlatList.attrs({
   margin-top:20px;
 `;
 
-export const Book = styled.View`
+export const Book = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   background-color: #fff;

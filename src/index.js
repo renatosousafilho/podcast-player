@@ -5,15 +5,19 @@
  * @format
  * @flow
  */
-import 'react-native-gesture-handler';
+
 import React from 'react';
-import Main from './Main';
-import Book from './Book';
+import { NavigationContainer } from '@react-navigation/native';
+import CustomStack from './customStack';
 import './config/ReactotronConfig';
+
+
+
 
 export default function App() {
   return (
-    // <Book></Book>
-    <Main></Main>
+    <NavigationContainer>
+      <CustomStack />
+    </NavigationContainer>    
   );
 }

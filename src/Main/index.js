@@ -1,35 +1,37 @@
-import React from 'react';
+import React, { useCallback  } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { Container, Books, Book, Cover, Info, Title, Author, Description } from './styles';
 import customData from './customData';
 
-class Main extends React.Component {
-  state = {
-    data: customData,
-  };
+function renderItem({ item, navigation }) {
+  return (
+    <Book onPress={() => navigation.navigate('Book', { bookId: item.id })}>
+      <Cover source={{uri: item.thumb_image_url}}></Cover>
+      <Info>
+        <Title>{item.title}</Title>
+        <Author>{item.author}</Author>
+        <Description>{item.description}</Description>
+      </Info>
+    </Book>
+  );
+}
 
-  renderRow({ item }) {
-    return (
-      <Book>
-        <Cover source={{uri: item.thumb_image_url}}></Cover>
-        <Info>
-          <Title>{item.title}</Title>
-          <Author>{item.author}</Author>
-          <Description>{item.description}</Description>
-        </Info>
-      </Book>
-    );
-  }
+keyExtractor = (item) => item.id;
 
-  render() {
-    return (
-      <Container>
-          <Books
-            data={this.state.data}
-            keyExtractor={item => item.id}
-            renderItem={this.renderRow}/>
-      </Container>
-    );
-  }
+function Main() {
+  const navigation = useNavigation();
+  const renderItemCall = useCallback(({ item }) => renderItem({item, navigation}));
+  
+  return (
+    <Container>
+      <Books
+        data={customData}
+        keyExtractor={keyExtractor}
+        renderItem={renderItemCall}
+        />
+    </Container>
+  );
+  
 }
 
 export default Main;
