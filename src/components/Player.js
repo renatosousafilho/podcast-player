@@ -7,7 +7,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ViewPropTypes,
 } from 'react-native';
 import Tracker from './Tracker';
 import playIcon from './icons/play-icon.png';
@@ -26,12 +25,6 @@ function ControlButton({ icon, onPress }) {
     </TouchableOpacity>
   );
 }
-
-ControlButton.propTypes = {
-  icon: PropTypes.number.isRequired,
-  onPress: PropTypes.func.isRequired,
-};
-
 export default function Player(props) {
   const playbackState = TrackPlayer.usePlaybackState();
   const [trackTitle, setTrackTitle] = useState('');
@@ -77,13 +70,6 @@ export default function Player(props) {
     </View>
   );
 }
-
-Player.propTypes = {
-  style: ViewPropTypes.style,
-  onNext: PropTypes.func.isRequired,
-  onPrevious: PropTypes.func.isRequired,
-  onTogglePlayback: PropTypes.func.isRequired,
-};
 
 Player.defaultProps = {
   style: {},

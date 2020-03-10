@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import TrackPlayer, { ProgressComponent } from 'react-native-track-player';
+import { View, Text, StyleSheet } from 'react-native';
+import TrackPlayer from 'react-native-track-player';
 import Slider from '@react-native-community/slider';
 
 export default class TrackStatus extends TrackPlayer.ProgressComponent {
@@ -31,7 +31,7 @@ export default class TrackStatus extends TrackPlayer.ProgressComponent {
         TrackPlayer.seekTo(this.seek);
         this.position = this.seek;
         TrackPlayer.play();
-        //this.setState({isSeeking:false})
+        // this.setState({isSeeking:false})
       }
     });
   }
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   slider: {
-    width: '80%',
+    width: '70%',
     backgroundColor: '#FFFFFF',
   },
   currentPosition: {
