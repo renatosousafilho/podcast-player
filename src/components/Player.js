@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import TrackPlayer from 'react-native-track-player';
 import {
   Image,

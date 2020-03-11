@@ -45,3 +45,14 @@ export const Description = styled.Text.attrs({
   numberOfLines:2
 })`
 `;
+
+export const Footer = styled.View`
+  flex: 1;
+  position: absolute;
+  bottom: 0px;
+  height: 60px;
+  background-color: #FF9800;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;

@@ -1,34 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import TrackPlayer from 'react-native-track-player';
 import Player from '../../components/Player';
 import books from '../../data/podcasts';
+import { playerReducer, initialPlayerState } from '../../reducers/player-reducer';
 
 import { Container } from './styles';
 
 export default function Book({route, navigation}) {
   const { bookId } = route.params;
   const selectedBook = books.find(book => book.id === bookId);
+  const [ playerState, dispatch ] = useReducer(playerReducer, initialPlayerState);
+  const { currentBook } = playerState;
+
   
   const playbackState = TrackPlayer.usePlaybackState();
 
   useEffect(() => {
-    TrackPlayer.setupPlayer();
-
-    TrackPlayer.updateOptions({
-      stopWithApp: true,
-      capabilities: [
-        TrackPlayer.CAPABILITY_PLAY,
-        TrackPlayer.CAPABILITY_PAUSE,
-        TrackPlayer.CAPABILITY_SKIP_TO_NEXT,
-        TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS,
-        TrackPlayer.CAPABILITY_STOP,
-      ],
-      compactCapabilities: [
-        TrackPlayer.CAPABILITY_PLAY,
-        TrackPlayer.CAPABILITY_PAUSE,
-      ],
-    });
-
     TrackPlayer.reset();
     TrackPlayer.add({
       id: selectedBook.id,
@@ -37,6 +24,11 @@ export default function Book({route, navigation}) {
       artist: selectedBook.author,
       artwork: selectedBook.cover_image_url,
     });
+
+    dispatch({
+      type: 'SET_TRACK',
+      book: selectedBook,
+    });    
   }, []);
 
   async function togglePlayback() {
