@@ -6,17 +6,16 @@
  * @flow
  */
 
-import React, { useEffect, useReducer, useContext } from 'react';
+import React, { useEffect } from 'react';
 import TrackPlayer from 'react-native-track-player';
 import { NavigationContainer } from '@react-navigation/native';
-import Routes from './routes';
+
 import './config/ReactotronConfig';
-import { playerReducer, initialPlayerState } from './reducers/player-reducer';
-import { Context } from './connect';
+
+import Routes from './routes';
+import Store from './store';
 
 export default function App() {
-  const [ state, dispatch ] = useReducer(playerReducer, initialPlayerState);
-  
   useEffect(() => {
     TrackPlayer.setupPlayer();
 
@@ -37,11 +36,10 @@ export default function App() {
   }, []);
 
   return (
-    <Context.Provider value={{state, dispatch}}>
+    <Store>
       <NavigationContainer>
         <Routes />
       </NavigationContainer>    
-    </Context.Provider>
-    
+    </Store>
   );
 }

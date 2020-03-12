@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-export const Context = React.createContext();
+import { Context } from './store';
 
 export default function connect(mapStateToProps, mapDispatchToProps) {
   return function (Component) {
