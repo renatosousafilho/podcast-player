@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Container, Books, Book, Cover, Info, Title, Author, Description, Footer } from './styles';
 // import books from '../../data/books';
 import books from '../../data/podcasts';
+import connect, { Context } from '../../connect';
 
 function renderItem({ item, navigation, dispatchAddBook }) {
   return (
@@ -24,7 +25,7 @@ function renderItem({ item, navigation, dispatchAddBook }) {
 
 keyExtractor = (item) => item.id;
 
-export default function Main({book, dispatchAddBook}) {
+function Main({book, dispatchAddBook}) {
   const navigation = useNavigation();
   const renderItemCall = useCallback(({ item }) => renderItem({item, navigation, dispatchAddBook}));
 
@@ -42,3 +43,16 @@ export default function Main({book, dispatchAddBook}) {
   ); 
 }
 
+function mapStateToProps(state) {
+  return {
+      book: state.book
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+      dispatchAddBook: (book)=> dispatch({type: 'SET_TRACK', book: book})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

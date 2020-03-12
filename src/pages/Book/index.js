@@ -4,7 +4,9 @@ import Player from '../../components/Player';
 
 import { Container } from './styles';
 
-export default function Book({book}) {
+import connect, { Context } from '../../connect';
+
+function Book({book}) {
   const playbackState = TrackPlayer.usePlaybackState();
 
   useEffect(() => {
@@ -36,3 +38,17 @@ export default function Book({book}) {
   );
 }
 
+
+function mapStateToProps(state) {
+  return {
+      book: state.book
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+      dispatchAddBook: (book)=> dispatch({type: 'SET_TRACK', book: book})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Book);
