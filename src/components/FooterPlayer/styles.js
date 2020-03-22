@@ -1,20 +1,26 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-  flex: 1;
-`;
-
-export const Books = styled.FlatList.attrs({
-  showVerticalScrollIndicator: false,
-})``;
-
 export const Book = styled.TouchableOpacity`
+  border-top-width: 1px;
+  border-top-color: green;
+  background: blue;
   flex-direction: row;
   align-items: center;
   background-color: #fff;
   flex-grow: 1;
   margin: 2px;
-  padding: 10px;
+`;
+
+export const ControlButtonContainer = styled.TouchableOpacity`
+  width: 40px;
+  height: 30px;
+
+  margin-right: 10px;
+`;
+
+export const ControlButtonImage = styled.Image`
+  width: 40px;
+  height: 30px;
 `;
 
 export const Cover = styled.Image`
@@ -25,6 +31,7 @@ export const Cover = styled.Image`
 
 export const Info = styled.View`
   flex: 1;
+  flex-direction: column;
   margin-left: 10px;
 `;
 
@@ -38,19 +45,4 @@ export const Title = styled.Text.attrs({
 
 export const Author = styled.Text`
   font-size: 11px;
-`;
-
-export const Description = styled.Text.attrs({
-  numberOfLines: 2,
-})``;
-
-export const Footer = styled.View`
-  flex: 1;
-  position: absolute;
-  bottom: 40px;
-  height: 60px;
-  background-color: #ff9800;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
 `;

@@ -1,12 +1,12 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect } from 'react';
 import TrackPlayer from 'react-native-track-player';
 import Player from '../../components/Player';
 
 import { Container } from './styles';
 
-import connect, { Context } from '../../connect';
+import connect from '../../connect';
 
-function Book({book}) {
+function Book({ book }) {
   const playbackState = TrackPlayer.usePlaybackState();
 
   useEffect(() => {
@@ -21,7 +21,10 @@ function Book({book}) {
   }, []);
 
   async function togglePlayback() {
-    if (playbackState === TrackPlayer.STATE_PAUSED || playbackState == TrackPlayer.STATE_READY) {
+    if (
+      playbackState === TrackPlayer.STATE_PAUSED ||
+      playbackState == TrackPlayer.STATE_READY
+    ) {
       await TrackPlayer.play();
     } else {
       await TrackPlayer.pause();
@@ -33,22 +36,25 @@ function Book({book}) {
 
   return (
     <Container>
-      <Player onTogglePlayback={togglePlayback} onNext={onNext} onPrevious={onPrevious} />
+      <Player
+        onTogglePlayback={togglePlayback}
+        onNext={onNext}
+        onPrevious={onPrevious}
+      />
     </Container>
   );
 }
 
-
 function mapStateToProps(state) {
   return {
-      book: state.book
-  }
+    book: state.book,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-      dispatchAddBook: (book)=> dispatch({type: 'SET_TRACK', book: book})
-  }
+    dispatchAddBook: book => dispatch({ type: 'SET_TRACK', book: book }),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Book);

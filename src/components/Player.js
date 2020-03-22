@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import TrackPlayer from 'react-native-track-player';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Tracker from './Tracker';
 import playIcon from './icons/play-icon.png';
 import pauseIcon from './icons/pause-icon.png';
