@@ -1,4 +1,4 @@
-package com.reactcalculator;
+package com.12mindesafio;
 
 import android.app.Application;
 import android.content.Context;

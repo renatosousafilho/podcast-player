@@ -1,8 +1,8 @@
 platform :ios, '10.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'ReactCalculator' do
-  # Pods for ReactCalculator
+target '12minDesafio' do
+  # Pods for 12minDesafio
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -35,7 +35,7 @@ target 'ReactCalculator' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 
-  target 'ReactCalculatorTests' do
+  target '12minDesafioTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -43,10 +43,10 @@ target 'ReactCalculator' do
   use_native_modules!
 end
 
-target 'ReactCalculator-tvOS' do
-  # Pods for ReactCalculator-tvOS
+target '12minDesafio-tvOS' do
+  # Pods for 12minDesafio-tvOS
 
-  target 'ReactCalculator-tvOSTests' do
+  target '12minDesafio-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

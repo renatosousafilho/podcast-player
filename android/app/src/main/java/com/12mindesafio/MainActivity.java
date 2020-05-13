@@ -1,4 +1,4 @@
-package com.reactcalculator;
+package com.12mindesafio;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "ReactCalculator";
+    return "12minDesafio";
   }
 }

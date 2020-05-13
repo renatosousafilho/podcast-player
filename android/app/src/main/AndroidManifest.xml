@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.reactcalculator">
+  package="com.12mindesafio">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
