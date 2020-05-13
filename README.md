@@ -1,4 +1,4 @@
-# 🗓 12min-desafio
+# 📱 12min-desafio
 
 Plataforma para consumo de e-books
 
