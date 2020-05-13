@@ -1,9 +1,10 @@
 export const initialPlayerState = { book: {} };
 
-export const playerReducer = (state, action) => {
+export default function player(state = initialPlayerState, action) {
   switch (action.type) {
-    case 'SET_TRACK':
+    case '@player/SET_TRACK': {
       return { ...state, book: action.book };
+    }
     default:
       return state;
   }

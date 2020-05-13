@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import TrackPlayer from 'react-native-track-player';
+
 import Player from '../../components/Player';
 
 import { Container } from './styles';
 
-import connect from '../../connect';
-
-function Book({ book }) {
+export default function Book() {
   const playbackState = TrackPlayer.usePlaybackState();
+
+  const { book } = useSelector(state => state.player);
 
   useEffect(() => {
     TrackPlayer.reset();
+
     TrackPlayer.add({
       id: book.id,
       url: book.audio_url,
@@ -44,17 +47,3 @@ function Book({ book }) {
     </Container>
   );
 }
-
-function mapStateToProps(state) {
-  return {
-    book: state.book,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatchAddBook: book => dispatch({ type: 'SET_TRACK', book: book }),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Book);

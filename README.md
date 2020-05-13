@@ -5,6 +5,7 @@ Plataforma para consumo de e-books
 ## 🛠 Tecnologias
 
 - React native
+- Redux
 - React native track player
 
 ## 🚀 Instalação e execução

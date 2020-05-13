@@ -1,19 +1,12 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, { useEffect } from 'react';
-import TrackPlayer from 'react-native-track-player';
 import { NavigationContainer } from '@react-navigation/native';
+import TrackPlayer from 'react-native-track-player';
+import { Provider } from 'react-redux';
 
 import './config/ReactotronConfig';
 
 import Routes from './routes';
-import Store from './store';
+import store from './store';
 
 export default function App() {
   useEffect(() => {
@@ -36,10 +29,10 @@ export default function App() {
   }, []);
 
   return (
-    <Store>
+    <Provider store={store}>
       <NavigationContainer>
         <Routes />
-      </NavigationContainer>    
-    </Store>
+      </NavigationContainer>
+    </Provider>
   );
 }

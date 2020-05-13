@@ -1,4 +1,5 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import TrackPlayer from 'react-native-track-player';
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -12,17 +13,16 @@ import {
   Description,
   Footer,
 } from './styles';
-// import books from '../../data/books';
 import books from '../../data/podcasts';
-import connect from '../../connect';
 import FooterPlayer from '../../components/FooterPlayer';
 
-function renderItem({ item, navigation, dispatchAddBook }) {
+import { setBook } from '../../store/modules/player/actions';
+
+function renderItem({ item, handleClickButton }) {
   return (
     <Book
       onPress={() => {
-        dispatchAddBook(item);
-        navigation.navigate('Book');
+        handleClickButton(item);
       }}
     >
       <Cover source={{ uri: item.thumb_image_url }}></Cover>
@@ -37,14 +37,24 @@ function renderItem({ item, navigation, dispatchAddBook }) {
 
 keyExtractor = item => item.id;
 
-function Main({ book, dispatchAddBook }) {
+export default function Main() {
   const navigation = useNavigation();
 
-  const renderItemCall = useCallback(({ item }) =>
-    renderItem({ item, navigation, dispatchAddBook })
-  );
+  const dispatch = useDispatch();
 
   const playbackState = TrackPlayer.usePlaybackState();
+
+  const { book } = useSelector(state => state.player);
+
+  function handleClickButton(book) {
+    dispatch(setBook(book));
+
+    navigation.navigate('Book');
+  }
+
+  const renderBookCall = useCallback(({ item }) =>
+    renderItem({ item, handleClickButton })
+  );
 
   async function togglePlayback() {
     if (
@@ -62,29 +72,11 @@ function Main({ book, dispatchAddBook }) {
       <Books
         data={books}
         keyExtractor={keyExtractor}
-        renderItem={renderItemCall}
+        renderItem={renderBookCall}
       />
       <Footer>
-        {book ? (
-          <FooterPlayer book={book} togglePlayback={togglePlayback} />
-        ) : (
-          <View />
-        )}
+        {book && <FooterPlayer book={book} togglePlayback={togglePlayback} />}
       </Footer>
     </Container>
   );
 }
-
-function mapStateToProps(state) {
-  return {
-    book: state.book,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatchAddBook: book => dispatch({ type: 'SET_TRACK', book: book }),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
