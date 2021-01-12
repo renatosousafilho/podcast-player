@@ -1,4 +1,4 @@
-# 📱 12min-desafio
+# 📱 Podcast Player
 
 Plataforma para consumo de e-books
 
@@ -11,7 +11,7 @@ Plataforma para consumo de e-books
 ## 🚀 Instalação e execução
 
 1. Faça um clone desse repositório;
-2. Entre na pasta rodando `cd 12min-desafio`;
+2. Entre na pasta rodando `cd podcast-player`;
 3. Rode `yarn` para instalar as dependências;
 4. Rode `react-native run-ios` para iniciar a aplicação.
 
